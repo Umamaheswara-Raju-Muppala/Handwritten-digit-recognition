@@ -1,5 +1,18 @@
 package com.digit.service;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Path;
+import java.text.DecimalFormat;
+
+import javax.imageio.ImageIO;
+
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -10,13 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.digit.dtos.PredictionResponse;
 
 import jakarta.annotation.PostConstruct;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
-import java.nio.file.Path;
-import java.text.DecimalFormat;
 
 @Service
 public class PredictionService {
@@ -90,8 +96,9 @@ public class PredictionService {
 	}
 
 	private double[] preprocessToFlattened(BufferedImage src, boolean invert) throws IOException {
-		if (src == null)
+		if (src == null) {
 			throw new IllegalArgumentException("Source image is null");
+		}
 
 		int width = src.getWidth();
 		int height = src.getHeight();
@@ -114,14 +121,18 @@ public class PredictionService {
 		for (int y = 0; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				if (gray[y][x] > threshold) {
-					if (x < minX)
+					if (x < minX) {
 						minX = x;
-					if (x > maxX)
+					}
+					if (x > maxX) {
 						maxX = x;
-					if (y < minY)
+					}
+					if (y < minY) {
 						minY = y;
-					if (y > maxY)
+					}
+					if (y > maxY) {
 						maxY = y;
+					}
 				}
 			}
 		}

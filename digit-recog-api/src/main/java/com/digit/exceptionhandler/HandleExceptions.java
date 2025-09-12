@@ -1,17 +1,18 @@
 package com.digit.exceptionhandler;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.multipart.MultipartException;
+
 import com.digit.dtos.SimpleErrorStructure;
 import com.digit.exceptions.FileMissingException;
 
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-import org.springframework.web.multipart.MultipartException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
 @RestControllerAdvice
 public class HandleExceptions {
